@@ -1,0 +1,36 @@
+1. India Today
+
+start_urls = [
+  "https://www.ndtv.com/world-news",
+  "https://www.ndtv.com/india",
+  "https://www.ndtv.com/elections",
+  "https://www.ndtv.com/technology",
+  "https://www.ndtv.com/sports",
+  "https://www.ndtv.com/entertainment",
+  "https://www.ndtv.com/business",
+  "https://www.ndtv.com/health",
+  "https://www.ndtv.com/education",
+  "https://www.ndtv.com/auto",
+  "https://www.ndtv.com/science",
+  "https://www.ndtv.com/offbeat"
+]
+
+2. The 
+start_urls = [
+    "https://www.indiatoday.in/india",              # National news
+    "https://www.indiatoday.in/world/all",              # International
+    "https://www.indiatoday.in/technology",         # Tech
+    "https://www.indiatoday.in/education-today",    # Education
+    "https://www.indiatoday.in/business",           # Business
+    "https://www.indiatoday.in/sports",             # Sports
+    "https://www.indiatoday.in/movies",   # Entertainment
+    "https://www.indiatoday.in/science",            # Science
+    "https://www.indiatoday.in/lifestyle",          # Lifestyle
+    "https://www.indiatoday.in/auto",               # Auto
+    "https://www.indiatoday.in/states/tamil-nadu",  # Tamil Nadu state news
+    "https://www.indiatoday.in/states/telangana"    # Telangana state news
+]
+
+
+
+
