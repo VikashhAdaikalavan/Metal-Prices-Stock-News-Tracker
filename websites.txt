@@ -15,7 +15,7 @@ start_urls = [
   "https://www.ndtv.com/offbeat"
 ]
 
-2. The 
+2. India Today
 start_urls = [
     "https://www.indiatoday.in/india",              # National news
     "https://www.indiatoday.in/world/all",              # International
