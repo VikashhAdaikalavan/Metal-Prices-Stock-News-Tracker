@@ -16,11 +16,17 @@ class NewsSpider(scrapy.Spider):
     "https://www.indiatoday.in/states/tamil-nadu",  # Tamil Nadu state news
     "https://www.indiatoday.in/states/telangana"    # Telangana state news
     ]
-
+    
     def parse(self, response):
+
+        topics = ['World','India','Technology','education-today','business','sports','movies','science','lifestyle','auto','tamilnadu','telengana']
         
         for article in response.css("div.B1S3_content__wrap__9mSB6"):
             
+            topic = response.url.split("/")[-1]
+            if topic  == "all":
+                topic = "world" 
+
             title= article.css("h2 a::text").get()
             relative_url = article.css("h2 a::attr(href)").get()
             full_url = response.urljoin(relative_url)
@@ -31,13 +37,11 @@ class NewsSpider(scrapy.Spider):
 
 
             yield {
+                "topic":topic,
                 "title": title,
                 "url": full_url,
                 "summary": summary
             }
-
-        yield{
-            "title": "break"
-        }
+        
             
 
