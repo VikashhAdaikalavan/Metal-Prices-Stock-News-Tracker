@@ -1,0 +1,21 @@
+Ideas::
+
+
+🔹 A. News Module
+Fetch articles from specific sites or RSS feeds
+
+Summarize them using NLP
+
+🔹 B. Price Tracker Module
+Track selected product URLs
+
+Detect price drops or fluctuations
+
+🔹 C.1 Email Notifier Module
+Combine the above results into a single, formatted email
+
+Send it daily
+
+🔹C.2 Display it on a Webpage Dashboard
+Frontend development
+Storing info in database
