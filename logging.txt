@@ -1,8 +1,12 @@
 Day 1
 
 Initialised Git repo
+
 Researching on websites to scrape data 
+
 Found India today to be a good option as all the pages are of simmilar html script
+
 Built an LLM to summarize data in case the data to be given is longer than expected
+
 Built a scrappy spider to scrape many websites of different topics
 
