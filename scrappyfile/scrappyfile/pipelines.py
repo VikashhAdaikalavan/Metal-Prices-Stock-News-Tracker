@@ -8,6 +8,7 @@
 from itemadapter import ItemAdapter
 from scrappyfile.llm import summarize
 import sqlite3
+import os
 
 
 class News_Summary_Pipeline:
@@ -19,12 +20,24 @@ class News_Summary_Pipeline:
         return item
 
 class Database_Pipeline:
+    def open_spider(self,spider):
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) #I wanted to store the database in the directory where scrapy.cfg is stored
+        db_path = os.path.join(base_dir, 'news.db')
+        
+        self.connection = sqlite3.connect(db_path)
+        self.cursor = self.connection.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS articles")
+        self.cursor.execute("""CREATE TABLE articles (topic TEXT,title TEXT,url TEXT UNIQUE,summary TEXT,llm_summary TEXT)""")
+
     #To store the data in a sqlite databse
     def process_item(self,item,spider):
-        connection = sqlite3.connect("news.db")
-        cursor = connection.cursor()
-        cursor.execute("DROP TABLE IF EXISTS article")
-        cursor.execute("Create new table article()")
-
+        adapted_item = ItemAdapter(item)
+        try:
+            self.cursor.execute("INSERT INTO articles values(?,?,?,?,?)",(adapted_item.get('topic'),adapted_item.get('title'),adapted_item.get('url'),adapted_item.get('summary'),adapted_item.get('llm_summary')))
+            self.connection.commit()
+        except sqlite3.IntegrityError:
+            print("Duplicate Entry")
 
         return item
+    def close_spider(self,spider):
+        self.connection.close()

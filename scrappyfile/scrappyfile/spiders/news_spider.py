@@ -17,7 +17,7 @@ class NewsSpider(scrapy.Spider):
     ]
 
 
-    custom_settings = {'ITEM_PIPELINES': {'scrappyfile.pipelines.News_Summary_Pipeline':300}}
+    custom_settings = {'ITEM_PIPELINES': {'scrappyfile.pipelines.News_Summary_Pipeline':100,'scrappyfile.pipelines.Database_Pipeline':200}}
     
     def parse(self, response):
 
