@@ -1,4 +1,5 @@
 import scrapy
+import time
 
 class NewsSpider(scrapy.Spider):
     name = "news_spider"
@@ -13,8 +14,6 @@ class NewsSpider(scrapy.Spider):
     "https://www.indiatoday.in/science",            # Science
     "https://www.indiatoday.in/lifestyle",          # Lifestyle
     "https://www.indiatoday.in/auto",               # Auto
-    "https://www.indiatoday.in/states/tamil-nadu",  # Tamil Nadu state news
-    "https://www.indiatoday.in/states/telangana"    # Telangana state news
     ]
     
     def parse(self, response):
@@ -29,6 +28,11 @@ class NewsSpider(scrapy.Spider):
 
             title= article.css("h2 a::text").get()
             relative_url = article.css("h2 a::attr(href)").get()
+
+            if title == None:
+                title= article.css("h3 a::text").get()
+                relative_url = article.css("h3 a::attr(href)").get()
+
             full_url = response.urljoin(relative_url)
             summary = article.css("div.B1S3_story__shortcont__inicf p::text").get()
 
