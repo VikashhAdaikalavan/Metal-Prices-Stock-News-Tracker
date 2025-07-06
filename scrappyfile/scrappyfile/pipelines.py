@@ -6,8 +6,17 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from scrappyfile.llm import summarize
 
 
-class ScrappyfilePipeline:
+class News_Summary_Pipeline:
     def process_item(self, item, spider):
+        adapted_item = ItemAdapter(item)
+        adapted_item["llm_summary"] = summarize(adapted_item["summary"])
+
+        return item
+
+class Database_Pipeline:
+    def process_item(self,item,spider):
+
         return item

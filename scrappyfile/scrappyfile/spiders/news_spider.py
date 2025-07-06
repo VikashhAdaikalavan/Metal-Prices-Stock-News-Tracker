@@ -15,6 +15,9 @@ class NewsSpider(scrapy.Spider):
     "https://www.indiatoday.in/lifestyle",          # Lifestyle
     "https://www.indiatoday.in/auto",               # Auto
     ]
+
+
+    custom_settings = {'ITEM_PIPELINES': {'scrappyfile.pipelines.News_Summary_Pipeline':300}}
     
     def parse(self, response):
 
