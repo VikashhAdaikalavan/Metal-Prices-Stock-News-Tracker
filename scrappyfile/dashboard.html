@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 50%, #0d47a1 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            height: 100vh;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .news-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: slideInLeft 0.8s ease-out;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 160px);
+        }
+
+        .news-header {
+            color: white;
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .news-title-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .filter-dropdown {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 6px 12px;
+            color: white;
+            font-size: 0.8em;
+            outline: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .filter-dropdown:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-dropdown option {
+            background: #1976d2;
+            color: white;
+        }
+
+        .filter-icon {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            padding: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .filter-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: white;
+        }
+
+        .news-feed {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .news-feed::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .news-feed::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .news-feed::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .news-feed::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .news-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid #2196f3;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .news-item[data-category] {
+            position: relative;
+        }
+
+        .news-item::before {
+            content: attr(data-category);
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(33, 150, 243, 0.1);
+            color: #2196f3;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .news-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-summary {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        .news-source {
+            font-weight: 500;
+            color: #2196f3;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: slideInRight 0.8s ease-out;
+            height: calc(100vh - 160px);
+        }
+
+        .widget {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .widget:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .widget-title {
+            color: white;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+
+        .widget-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stock-search-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .stock-search-box {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 0.85em;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 140px;
+        }
+
+        .stock-search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .stock-search-box:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .stock-search-icon {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            padding: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stock-search-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .stock-search-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: white;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .price-label {
+            color: white;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .price-value {
+            color: #00bcd4;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .price-change {
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+
+        .positive {
+            color: #00bcd4;
+        }
+
+        .negative {
+            color: #f87171;
+        }
+
+        .loading {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            padding: 20px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .sidebar {
+                order: -1;
+                height: auto;
+            }
+            
+            .news-section {
+                height: 60vh;
+            }
+            
+            .news-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .news-title-text {
+                text-align: center;
+            }
+            
+            .filter-container {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>📰 News Dashboard</h1>
+            <p>Stay updated with the latest news and market trends</p>
+        </div>
+
+        <div class="news-section">
+            <div class="news-header">
+                <span class="news-title-text">📰 Latest News</span>
+                <div class="filter-container">
+                    <select class="filter-dropdown" id="newsFilter">
+                        <option value="all">All Categories</option>
+                        <option value="Markets">Markets</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Energy">Energy</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Science">Science</option>
+                        <option value="Crypto">Crypto</option>
+                        <option value="Environment">Environment</option>
+                    </select>
+                    <div class="filter-icon" onclick="applyFilter()">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="news-feed" id="newsFeed">
+                <div class="loading pulse">Loading news articles...</div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="widget">
+                <div class="widget-title">💰 Gold & Silver</div>
+                <div class="widget-content">
+                    <div class="price-item">
+                        <span class="price-label">Gold (1 oz)</span>
+                        <span class="price-value">$2,045.30 <span class="price-change positive">+0.8%</span></span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-label">Silver (1 oz)</span>
+                        <span class="price-value">$24.15 <span class="price-change negative">-0.3%</span></span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-label">Gold/Silver Ratio</span>
+                        <span class="price-value">84.7</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-title">📈 Stock Market</div>
+                <div class="widget-content">
+                    <div class="stock-search-container">
+                        <input type="text" class="stock-search-box" placeholder="Search stocks..." id="stockSearch">
+                        <div class="stock-search-icon" onclick="searchStocks()">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-label">S&P 500</span>
+                        <span class="price-value">4,532.76 <span class="price-change positive">+1.2%</span></span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-label">NASDAQ</span>
+                        <span class="price-value">14,239.88 <span class="price-change positive">+0.9%</span></span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-label">DOW JONES</span>
+                        <span class="price-value">35,630.68 <span class="price-change negative">-0.2%</span></span>
+                    </div>
+                    <div class="price-item">
+                        <span class="price-label">NIFTY 50</span>
+                        <span class="price-value">19,674.25 <span class="price-change positive">+0.7%</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample news data - replace with your scraped data
+        const sampleNews = [
+            {
+                title: "Global Markets Show Strong Recovery Amid Economic Optimism",
+                summary: "Stock markets worldwide are experiencing a significant upturn as investors show renewed confidence in economic recovery. The positive sentiment is driven by strong corporate earnings and improved economic indicators across major economies.",
+                source: "Financial Times",
+                time: "2 hours ago",
+                category: "Markets"
+            },
+            {
+                title: "Technology Sector Leads Innovation in Artificial Intelligence",
+                summary: "Major technology companies are announcing groundbreaking advances in AI capabilities, with new applications spanning from healthcare to autonomous vehicles. Industry experts predict this could reshape multiple sectors.",
+                source: "TechCrunch",
+                time: "4 hours ago",
+                category: "Technology"
+            },
+            {
+                title: "Renewable Energy Investments Reach Record Highs",
+                summary: "Global investment in renewable energy projects has reached unprecedented levels, with solar and wind power leading the charge. Government incentives and decreasing costs are driving this massive expansion.",
+                source: "Reuters",
+                time: "6 hours ago",
+                category: "Energy"
+            },
+            {
+                title: "Central Banks Signal Continued Monetary Policy Support",
+                summary: "Major central banks worldwide are maintaining their supportive stance on monetary policy, with officials indicating that current interest rate levels will persist to ensure economic stability and growth.",
+                source: "Bloomberg",
+                time: "8 hours ago",
+                category: "Economics"
+            },
+            {
+                title: "Healthcare Breakthrough in Cancer Treatment Research",
+                summary: "Scientists have announced a significant breakthrough in cancer treatment methodology, with new immunotherapy approaches showing remarkable success rates in clinical trials across multiple cancer types.",
+                source: "Medical News Today",
+                time: "12 hours ago",
+                category: "Healthcare"
+            },
+            {
+                title: "Space Exploration Reaches New Milestones",
+                summary: "Private space companies are achieving remarkable milestones in space exploration, with successful missions to the International Space Station and plans for lunar exploration gaining momentum.",
+                source: "Space News",
+                time: "1 day ago",
+                category: "Science"
+            },
+            {
+                title: "Cryptocurrency Market Shows Signs of Stabilization",
+                summary: "After months of volatility, the cryptocurrency market is showing signs of stabilization with major digital currencies finding support levels. Regulatory clarity is contributing to increased investor confidence.",
+                source: "CoinDesk",
+                time: "1 day ago",
+                category: "Crypto"
+            },
+            {
+                title: "Climate Change Initiatives Gain Global Momentum",
+                summary: "International cooperation on climate change initiatives is strengthening, with new agreements on carbon reduction targets and substantial funding commitments for green technology development.",
+                source: "Environmental Times",
+                time: "2 days ago",
+                category: "Environment"
+            }
+        ];
+
+        // Function to render news items
+        function renderNews() {
+            const newsFeed = document.getElementById('newsFeed');
+            newsFeed.innerHTML = '';
+
+            sampleNews.forEach((article, index) => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.style.animationDelay = `${index * 0.1}s`;
+                
+                newsItem.innerHTML = `
+                    <div class="news-title">${article.title}</div>
+                    <div class="news-summary">${article.summary}</div>
+                    <div class="news-meta">
+                        <span class="news-source">${article.source}</span>
+                        <span>${article.time}</span>
+                    </div>
+                `;
+                
+                newsItem.addEventListener('click', () => {
+                    newsItem.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        newsItem.style.transform = 'scale(1)';
+                    }, 150);
+                });
+                
+                newsFeed.appendChild(newsItem);
+            });
+        }
+
+        // Function to update financial data (simulate real-time updates)
+        function updateFinancialData() {
+            const priceElements = document.querySelectorAll('.price-value');
+            priceElements.forEach(element => {
+                // Add subtle pulse animation to show data is "live"
+                element.style.opacity = '0.7';
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                }, 300);
+            });
+        }
+
+        // Function to search stocks
+        function searchStocks() {
+            const searchTerm = document.getElementById('stockSearch').value.toLowerCase();
+            const stockItems = document.querySelectorAll('.price-item');
+            
+            stockItems.forEach(item => {
+                const label = item.querySelector('.price-label').textContent.toLowerCase();
+                
+                if (label.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    item.style.animation = 'fadeInDown 0.5s ease-out';
+                } else {
+                    item.style.display = searchTerm ? 'none' : 'flex';
+                }
+            });
+        }
+
+        // Function to apply filter
+        function applyFilter() {
+            const filterValue = document.getElementById('newsFilter').value;
+            const newsItems = document.querySelectorAll('.news-item');
+            
+            newsItems.forEach(item => {
+                const title = item.querySelector('.news-title').textContent.toLowerCase();
+                const summary = item.querySelector('.news-summary').textContent.toLowerCase();
+                
+                if (filterValue === 'all' || title.includes(filterValue.toLowerCase()) || summary.includes(filterValue.toLowerCase())) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Add smooth scrolling behavior
+        document.querySelector('.news-feed').addEventListener('scroll', function() {
+            const scrolled = this.scrollTop;
+            const rate = scrolled * -0.1;
+            this.style.backgroundPositionY = rate + 'px';
+        });
+
+        // Initialize the dashboard
+        renderNews();
+
+        // Update financial data every 30 seconds
+        setInterval(updateFinancialData, 30000);
+
+        // Function to add your scraped news data
+        function addScrapedNews(newsArray) {
+            // Replace sampleNews with your actual scraped data
+            // Expected format: {title, summary, source, time, category}
+            const newsFeed = document.getElementById('newsFeed');
+            newsFeed.innerHTML = '';
+            
+            newsArray.forEach((article, index) => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.style.animationDelay = `${index * 0.1}s`;
+                
+                newsItem.innerHTML = `
+                    <div class="news-title">${article.title}</div>
+                    <div class="news-summary">${article.summary}</div>
+                    <div class="news-meta">
+                        <span class="news-source">${article.source}</span>
+                        <span>${article.time}</span>
+                    </div>
+                `;
+                
+                newsFeed.appendChild(newsItem);
+            });
+        }
+
+        // Function to update market data
+        function updateMarketData(marketData) {
+            // Update financial widgets with real data
+            // Expected format: {symbol, price, change, changePercent}
+            // Implementation depends on your data source
+        }
+    </script>
+</body>
+</html>
