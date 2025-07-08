@@ -17,7 +17,7 @@ with open (os.path.join(base_dir, "emailformat.html"),'r') as f:
 
 connection = sqlite3.connect(os.path.join(base_dir, "news.db"))
 cursor = connection.cursor()
-cursor.execute("SELECT * FROM articles LIMIT 10 ")
+cursor.execute("SELECT * FROM articles LIMIT 70 ")
 news_items = cursor.fetchall()
 connection.close()
 

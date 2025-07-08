@@ -21,34 +21,43 @@ class NewsSpider(scrapy.Spider):
     
     def parse(self, response):
 
+        c = 0
+
         topics = ['World','India','Technology','education-today','business','sports','movies','science','lifestyle','auto','tamilnadu','telengana']
         
         for article in response.css("div.B1S3_content__wrap__9mSB6"):
+
+            if c <= 5:
             
-            topic = response.url.split("/")[-1]
-            if topic  == "all":
-                topic = "world" 
+                topic = response.url.split("/")[-1]
+                if topic  == "all":
+                    topic = "world" 
 
-            title= article.css("h2 a::text").get()
-            relative_url = article.css("h2 a::attr(href)").get()
+                title= article.css("h2 a::text").get()
+                relative_url = article.css("h2 a::attr(href)").get()
 
-            if title == None:
-                title= article.css("h3 a::text").get()
-                relative_url = article.css("h3 a::attr(href)").get()
+                if title == None:
+                    title= article.css("h3 a::text").get()
+                    relative_url = article.css("h3 a::attr(href)").get()
 
-            full_url = response.urljoin(relative_url)
-            summary = article.css("div.B1S3_story__shortcont__inicf p::text").get()
+                full_url = response.urljoin(relative_url)
+                summary = article.css("div.B1S3_story__shortcont__inicf p::text").get()
 
-            if title == None:
+                if title == None:
+                    break
+
+
+                c = c+1
+
+                yield {
+                    "topic":topic,
+                    "title": title,
+                    "url": full_url,
+                    "summary": summary
+                }
+
+            else:
                 break
-
-
-            yield {
-                "topic":topic,
-                "title": title,
-                "url": full_url,
-                "summary": summary
-            }
         
             
 

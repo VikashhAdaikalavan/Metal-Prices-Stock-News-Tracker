@@ -531,72 +531,17 @@
     </div>
 
     <script>
-        // Sample news data - replace with your scraped data
-        const sampleNews = [
-            {
-                title: "Global Markets Show Strong Recovery Amid Economic Optimism",
-                summary: "Stock markets worldwide are experiencing a significant upturn as investors show renewed confidence in economic recovery. The positive sentiment is driven by strong corporate earnings and improved economic indicators across major economies.",
-                source: "Financial Times",
-                time: "2 hours ago",
-                category: "Markets"
-            },
-            {
-                title: "Technology Sector Leads Innovation in Artificial Intelligence",
-                summary: "Major technology companies are announcing groundbreaking advances in AI capabilities, with new applications spanning from healthcare to autonomous vehicles. Industry experts predict this could reshape multiple sectors.",
-                source: "TechCrunch",
-                time: "4 hours ago",
-                category: "Technology"
-            },
-            {
-                title: "Renewable Energy Investments Reach Record Highs",
-                summary: "Global investment in renewable energy projects has reached unprecedented levels, with solar and wind power leading the charge. Government incentives and decreasing costs are driving this massive expansion.",
-                source: "Reuters",
-                time: "6 hours ago",
-                category: "Energy"
-            },
-            {
-                title: "Central Banks Signal Continued Monetary Policy Support",
-                summary: "Major central banks worldwide are maintaining their supportive stance on monetary policy, with officials indicating that current interest rate levels will persist to ensure economic stability and growth.",
-                source: "Bloomberg",
-                time: "8 hours ago",
-                category: "Economics"
-            },
-            {
-                title: "Healthcare Breakthrough in Cancer Treatment Research",
-                summary: "Scientists have announced a significant breakthrough in cancer treatment methodology, with new immunotherapy approaches showing remarkable success rates in clinical trials across multiple cancer types.",
-                source: "Medical News Today",
-                time: "12 hours ago",
-                category: "Healthcare"
-            },
-            {
-                title: "Space Exploration Reaches New Milestones",
-                summary: "Private space companies are achieving remarkable milestones in space exploration, with successful missions to the International Space Station and plans for lunar exploration gaining momentum.",
-                source: "Space News",
-                time: "1 day ago",
-                category: "Science"
-            },
-            {
-                title: "Cryptocurrency Market Shows Signs of Stabilization",
-                summary: "After months of volatility, the cryptocurrency market is showing signs of stabilization with major digital currencies finding support levels. Regulatory clarity is contributing to increased investor confidence.",
-                source: "CoinDesk",
-                time: "1 day ago",
-                category: "Crypto"
-            },
-            {
-                title: "Climate Change Initiatives Gain Global Momentum",
-                summary: "International cooperation on climate change initiatives is strengthening, with new agreements on carbon reduction targets and substantial funding commitments for green technology development.",
-                source: "Environmental Times",
-                time: "2 days ago",
-                category: "Environment"
-            }
-        ];
+        // News data
+        const News = [];
+
+
 
         // Function to render news items
         function renderNews() {
             const newsFeed = document.getElementById('newsFeed');
             newsFeed.innerHTML = '';
 
-            sampleNews.forEach((article, index) => {
+            News.forEach((article, index) => {
                 const newsItem = document.createElement('div');
                 newsItem.className = 'news-item';
                 newsItem.style.animationDelay = `${index * 0.1}s`;
