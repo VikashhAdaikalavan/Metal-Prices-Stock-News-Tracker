@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 import html
 import sqlite3
 import os
+from datetime import datetime
 
 
 # Reading files 
@@ -25,7 +26,16 @@ connection.close()
 
 #Creating html to inject
 
-news_html = ""
+date_info = datetime.now().strftime("%A, %B %d, %Y")
+
+news_html = f"""
+
+            <p style="margin:0; font-size: 14px; color: #bbbbbb;">Your Handpicked Headlines</p>
+            <p> </p>
+            <h2 style="margin:0; font-size: 13px; color: #bbbbbb;">{date_info}</h2>
+              
+            </td>
+          </tr>"""
 
 for topic, title, url,summary, llm_summary in news_items:
 
@@ -34,6 +44,7 @@ for topic, title, url,summary, llm_summary in news_items:
 
 
     news_html += f"""
+
     <tr>
         <td align="center" style="padding: 20px;">
         <table width="90%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border:1px solid #dddddd; border-radius:8px; padding:20px; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
