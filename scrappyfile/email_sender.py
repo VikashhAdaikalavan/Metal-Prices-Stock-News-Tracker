@@ -90,13 +90,15 @@ except smtplib.SMTPAuthenticationError as e:
     print(f"Error: {e}")
 
 
-message = MIMEMultipart('alternative')
-message["Subject"] = "📰 Daily News Digest"
-message["From"] = sender_email
 
-message.attach(MIMEText(final_html, "html"))
 
 for receiver_email in list_of_receivers:
+
+    message = MIMEMultipart('alternative')
+    message["Subject"] = "📰 Daily News Digest"
+    message["From"] = sender_email
+
+    message.attach(MIMEText(final_html, "html"))
     message["To"] = receiver_email
     
     try:

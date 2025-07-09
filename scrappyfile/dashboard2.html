@@ -454,24 +454,6 @@
         <div class="news-section">
             <div class="news-header">
                 <span class="news-title-text">📰 Latest News</span>
-                <div class="filter-container">
-                    <select class="filter-dropdown" id="newsFilter">
-                        <option value="all">All Categories</option>
-                        <option value="Markets">Markets</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Energy">Energy</option>
-                        <option value="Economics">Economics</option>
-                        <option value="Healthcare">Healthcare</option>
-                        <option value="Science">Science</option>
-                        <option value="Crypto">Crypto</option>
-                        <option value="Environment">Environment</option>
-                    </select>
-                    <div class="filter-icon" onclick="applyFilter()">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
-                        </svg>
-                    </div>
-                </div>
             </div>
             
             <div class="news-feed" id="newsFeed">
@@ -532,39 +514,83 @@
 
     <script>
         // News data
-        const News = [];
+        
+        // START LOOP HERE 
 
+        const News = [{
+                title: "Global Markets Show Strong Recovery Amid Economic Optimism",
+                summary: "Stock markets worldwide are experiencing a significant upturn as investors show renewed confidence in economic recovery. The positive sentiment is driven by strong corporate earnings and improved economic indicators across major economies.",
+                source: "Financial Times",
+                time: "2 hours ago",
+                category: "Markets"
+            },
+            {
+                title: "Technology Sector Leads Innovation in Artificial Intelligence",
+                summary: "Major technology companies are announcing groundbreaking advances in AI capabilities, with new applications spanning from healthcare to autonomous vehicles. Industry experts predict this could reshape multiple sectors.",
+                source: "TechCrunch",
+                time: "4 hours ago",
+                category: "Technology"
+            }];
 
+        // END LOOP HERE 
 
         // Function to render news items
-        function renderNews() {
-            const newsFeed = document.getElementById('newsFeed');
-            newsFeed.innerHTML = '';
+    function renderNews() {
+    const newsFeed = document.getElementById('newsFeed');
+    newsFeed.innerHTML = '';
 
-            News.forEach((article, index) => {
-                const newsItem = document.createElement('div');
-                newsItem.className = 'news-item';
-                newsItem.style.animationDelay = `${index * 0.1}s`;
-                
-                newsItem.innerHTML = `
-                    <div class="news-title">${article.title}</div>
-                    <div class="news-summary">${article.summary}</div>
-                    <div class="news-meta">
-                        <span class="news-source">${article.source}</span>
-                        <span>${article.time}</span>
-                    </div>
-                `;
-                
-                newsItem.addEventListener('click', () => {
-                    newsItem.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        newsItem.style.transform = 'scale(1)';
-                    }, 150);
-                });
-                
-                newsFeed.appendChild(newsItem);
-            });
-        }
+    News.forEach((article, index) => {
+        const newsItem = document.createElement('div');
+        newsItem.className = 'news-item';
+        newsItem.style.animationDelay = `${index * 0.1}s`;
+
+        const category = article.topic || 'General';
+
+        const urlButton = article.url
+            ? `<div style="text-align:left; margin-top:12px;">
+                    <a href="${article.url}" target="_blank" style="
+                        display:inline-block;
+                        padding:6px 12px;
+                        background-color:#1976d2;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:6px;
+                        font-size:0.85em;">Know more →</a>
+                </div>`
+            : '';
+
+        newsItem.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <div class="news-title">${article.title}</div>
+                <span style="
+                    font-size: 0.75em;
+                    color: #1976d2;
+                    background-color: rgba(25, 118, 210, 0.1);
+                    padding: 3px 10px;
+                    border-radius: 12px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                ">${category}</span>
+            </div>
+            <div class="news-summary">${article.llm_summary}</div>
+            <div class="news-meta" style="margin-top: 6px;">
+                <span>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+            </div>
+            ${urlButton}
+        `;
+
+        newsItem.addEventListener('click', () => {
+            newsItem.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                newsItem.style.transform = 'scale(1)';
+            }, 150);
+        });
+
+        newsFeed.appendChild(newsItem);
+    });
+}
+
+
 
         // Function to update financial data (simulate real-time updates)
         function updateFinancialData() {
