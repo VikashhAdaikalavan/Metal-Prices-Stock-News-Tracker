@@ -7,7 +7,7 @@ import html
 base_dir = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(base_dir,'news.db')
 
-with open (os.path.join(base_dir, "dashboard3.html"),'r') as f:
+with open (os.path.join(base_dir, "dashboard.html"),'r') as f:
     html_content = f.read()
 
 try:
@@ -21,7 +21,7 @@ data = cursor.fetchall()
 connection.close()
 
 insert_html = f""" 
-let newsData = [
+const News = [
 """
 for topic, title, url,summary, llm_summary in data:
 
@@ -31,9 +31,16 @@ for topic, title, url,summary, llm_summary in data:
 
     insert_html += f"""
     
-    {{topic : "{html.escape(topic).capitalize()}",title:"{html.escape(title).capitalize()}",summary:"{html.escape(llm_summary)}",url:"{html.escape(url)}"}},
+    {{
+        topic : "{html.escape(topic).capitalize()}",
+        title:"{html.escape(title).capitalize()}",
+        llm_summary:"{html.escape(llm_summary)}",
+        url:"{html.escape(url)}"
+    }},
     
     """
+end1 = len(insert_html)-1
+insert_html = insert_html[:end1]
 
 insert_html += '''];'''
 
@@ -45,7 +52,7 @@ end_index = html_content.find(end_marker)
 final_html = html_content[:start_index] + insert_html + html_content[end_index:]
 
 
-with open (os.path.join(base_dir, "dashboard3.html"),'w') as f:
+with open (os.path.join(base_dir, "dashboard.html"),'w') as f:
     f.write(final_html)
 
 
