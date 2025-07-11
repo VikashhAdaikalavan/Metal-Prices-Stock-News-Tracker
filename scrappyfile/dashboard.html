@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Dashboard</title>
+    <title>Metal Prices, Stock & News Tracker</title>
     <style>
         * {
             margin: 0;
@@ -13,380 +13,264 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #2196f3 0%, #1976d2 50%, #0d47a1 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            height: 100vh;
-            gap: 20px;
             padding: 20px;
-            max-width: 1400px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .header {
-            grid-column: 1 / -1;
-            text-align: center;
-            color: white;
-            margin-bottom: 20px;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .news-section {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            animation: slideInLeft 0.8s ease-out;
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 160px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .news-header {
-            color: white;
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            color: #34495e;
+            margin-bottom: 20px;
             font-size: 1.8em;
             font-weight: 600;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
         }
 
-        .news-title-text {
-            flex: 1;
-            text-align: left;
-        }
-
-        .filter-container {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .filter-dropdown {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 6px 12px;
-            color: white;
-            font-size: 0.8em;
-            outline: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            min-width: 120px;
-        }
-
-        .filter-dropdown:focus {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        .filter-dropdown option {
-            background: #1976d2;
-            color: white;
-        }
-
-        .filter-icon {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            padding: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .filter-icon:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .filter-icon svg {
-            width: 14px;
-            height: 14px;
-            fill: white;
-        }
-
-        .news-feed {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .news-feed::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .news-feed::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .news-feed::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            transition: background 0.3s ease;
-        }
-
-        .news-feed::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .news-item {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border-left: 4px solid #2196f3;
-        }
-
-        .news-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .news-item[data-category] {
-            position: relative;
-        }
-
-        .news-item::before {
-            content: attr(data-category);
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: rgba(33, 150, 243, 0.1);
-            color: #2196f3;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.7em;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .news-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .news-summary {
-            color: #666;
-            font-size: 0.95em;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .news-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85em;
-            color: #888;
-        }
-
-        .news-source {
-            font-weight: 500;
-            color: #2196f3;
-        }
-
-        .sidebar {
-            display: flex;
-            flex-direction: column;
+        .metals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            animation: slideInRight 0.8s ease-out;
-            height: calc(100vh - 160px);
-        }
-
-        .widget {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .widget:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .widget-title {
-            color: white;
-            font-size: 1.3em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            flex-shrink: 0;
-        }
-
-        .widget-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .stock-search-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 15px;
-            justify-content: center;
-        }
-
-        .stock-search-box {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 8px 12px;
-            color: white;
-            font-size: 0.85em;
-            outline: none;
-            transition: all 0.3s ease;
-            width: 140px;
-        }
-
-        .stock-search-box::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .stock-search-box:focus {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-        }
-
-        .stock-search-icon {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            padding: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stock-search-icon:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .stock-search-icon svg {
-            width: 14px;
-            height: 14px;
-            fill: white;
+            margin-bottom: 20px;
         }
 
         .price-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            border: 2px solid transparent;
             transition: all 0.3s ease;
-        }
-
-        .price-item:last-child {
-            border-bottom: none;
+            position: relative;
+            overflow: hidden;
         }
 
         .price-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding-left: 10px;
-            padding-right: 10px;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+
+        .price-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
         }
 
         .price-label {
-            color: white;
-            font-weight: 500;
-            font-size: 0.95em;
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
         }
 
         .price-value {
-            color: #00bcd4;
-            font-weight: 600;
-            font-size: 1.05em;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #27ae60;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .price-change {
-            font-size: 0.8em;
-            margin-left: 5px;
+            font-size: 0.9em;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600;
         }
 
-        .positive {
-            color: #00bcd4;
+        .price-change.positive {
+            color: #27ae60;
+            background: rgba(39, 174, 96, 0.1);
         }
 
-        .negative {
-            color: #f87171;
+        .price-change.negative {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
         }
 
-        .loading {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-style: italic;
-            padding: 20px;
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(145deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .delete-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
         }
 
         .api-status {
-            font-size: 0.7em;
-            color: rgba(255, 255, 255, 0.6);
-            text-align: center;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
             margin-top: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
         .api-status.success {
-            color: #4caf50;
+            background: rgba(46, 204, 113, 0.1);
+            color: #27ae60;
+            border: 1px solid rgba(46, 204, 113, 0.3);
         }
 
         .api-status.error {
-            color: #f87171;
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .stock-loading {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px dashed #bdc3c7;
+        }
+
+        .news-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .news-description {
+            color: #7f8c8d;
+            line-height: 1.6;
         }
 
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -394,159 +278,135 @@
             }
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
+            0% {
+                transform: scale(1);
             }
             50% {
-                opacity: 0.7;
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
             }
         }
 
-        .pulse {
+        .loading {
             animation: pulse 2s infinite;
         }
 
         @media (max-width: 768px) {
-            .dashboard {
+            .container {
+                padding: 20px;
+            }
+            
+            .metals-grid {
                 grid-template-columns: 1fr;
-                height: auto;
             }
             
-            .sidebar {
-                order: -1;
-                height: auto;
-            }
-            
-            .news-section {
-                height: 60vh;
-            }
-            
-            .news-header {
+            .controls {
                 flex-direction: column;
-                gap: 10px;
+                align-items: stretch;
             }
             
-            .news-title-text {
-                text-align: center;
-            }
-            
-            .filter-container {
-                justify-content: center;
+            .input-group {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard">
-        <div class="header">
-            <h1>📰 News Dashboard</h1>
-            <p>Stay updated with the latest news and market trends</p>
-        </div>
-
-        <div class="news-section">
-            <div class="news-header">
-                <span class="news-title-text">📰 Latest News</span>
-            </div>
-            
-            <div class="news-feed" id="newsFeed">
-                <div class="loading pulse">Loading news articles...</div>
-            </div>
-        </div>
-
-        <div class="sidebar">
-            <div class="widget">
-                <div class="widget-title">💰 Metals (USD/toz)</div>
-                <div class="widget-content">
-                    <div class="price-item">
-                        <span class="price-label">Gold</span>
-                        <span class="price-value" id="goldPriceUSD">$2,050.00</span>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">Silver</span>
-                        <span class="price-value" id="silverPriceUSD">$24.50</span>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">Platinum</span>
-                        <span class="price-value" id="platinumPriceUSD">$995.00</span>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">Palladium</span>
-                        <span class="price-value" id="palladiumPriceUSD">$1,250.00</span>
-                    </div>
-                    <div class="api-status" id="apiStatus">Loading live prices...</div>
+    <div class="container">
+        <h1>🏆 Metal Prices, Stock & News Tracker</h1>
+        
+        <!-- Metal Prices Section -->
+        <div class="section">
+            <h2>📊 Precious Metal Prices (USD/oz)</h2>
+            <div class="metals-grid">
+                <div class="price-item">
+                    <span class="price-label">🥇 Gold</span>
+                    <span class="price-value" id="goldPriceUSD">Loading...</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-label">🥈 Silver</span>
+                    <span class="price-value" id="silverPriceUSD">Loading...</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-label">💎 Platinum</span>
+                    <span class="price-value" id="platinumPriceUSD">Loading...</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-label">🔶 Palladium</span>
+                    <span class="price-value" id="palladiumPriceUSD">Loading...</span>
                 </div>
             </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="updateMetalPrices()">🔄 Refresh Prices</button>
+            </div>
+            <div class="api-status" id="apiStatus">Click refresh to load prices</div>
+        </div>
 
-            <div class="widget">
-                <div class="widget-title">📈 Stock Market</div>
-                <div class="widget-content">
-                    <div class="stock-search-container">
-                        <input type="text" class="stock-search-box" placeholder="Search stocks..." id="stockSearch">
-                        <div class="stock-search-icon" onclick="searchStocks()">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">S&P 500</span>
-                        <span class="price-value">4,532.76 <span class="price-change positive">+1.2%</span></span>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">NASDAQ</span>
-                        <span class="price-value">14,239.88 <span class="price-change positive">+0.9%</span></span>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">DOW JONES</span>
-                        <span class="price-value">35,630.68 <span class="price-change negative">-0.2%</span></span>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">NIFTY 50</span>
-                        <span class="price-value">19,674.25 <span class="price-change positive">+0.7%</span></span>
-                    </div>
+        <!-- Stock Tracker Section -->
+        <div class="section">
+            <h2>📈 Stock Tracker</h2>
+            <div class="controls">
+                <div class="input-group">
+                    <input type="text" id="stockSearch" placeholder="Enter stock symbol (e.g., AAPL)" onkeypress="handleStockKeyPress(event)">
+                    <button class="btn btn-success" onclick="addStock()">➕ Add Stock</button>
+                </div>
+            </div>
+            <div class="api-status" id="stockApiStatus">Add stock symbols to track prices</div>
+            <div id="stocksList">
+                <div class="stock-loading" id="stocksLoading">Add stock symbols to track prices</div>
+            </div>
+        </div>
+
+        <!-- News Section -->
+        <div class="section">
+            <h2 id="newsHeading">📰 News for today</h2>
+            <div id="newsList">
+                <div class="news-item">
+                    <div class="news-title">Sample Market News</div>
+                    <div class="news-description">This is where market news would appear. Add your news API integration here.</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // News data
         
-        // START LOOP HERE  
+       // START LOOP HERE  
         const News = []
         // END LOOP HERE 
 
         // Store previous prices for comparison
         let previousPrices = {};
 
-        // *** METALS.DEV API KEY ***
-        const METALS_API_KEY = ""; // Your metals.dev API key
+        // *** API KEYS ***
+        const METALS_API_KEY = "METALS_API_KEY"; 
+        const ALPHA_VANTAGE_API_KEY = "ALPHA_VANTAGE_KEY"; 
         
-        // Function to fetch metal rates from metals.dev API in native USD/toz format
+        // Store tracked stocks
+        let trackedStocks = [];
+
+        // Function to fetch metal rates (Demo mode with mock data)
         async function fetchMetalRates() {
+            // Since we don't have a real API key, we'll simulate the data
+            if (!METALS_API_KEY || METALS_API_KEY === "YOUR_METALS_API_KEY") {
+                // Mock data for demonstration
+                return {
+                    status: "success",
+                    currency: "USD",
+                    unit: "toz",
+                    timestamp: new Date().toISOString(),
+                    metals: {
+                        gold: 1950 + (Math.random() - 0.5) * 100,
+                        silver: 24 + (Math.random() - 0.5) * 2,
+                        platinum: 1000 + (Math.random() - 0.5) * 50,
+                        palladium: 1200 + (Math.random() - 0.5) * 100
+                    }
+                };
+            }
+
             const url = `https://api.metals.dev/v1/latest?api_key=${METALS_API_KEY}&currency=USD&unit=toz`;
             
             try {
@@ -564,6 +424,39 @@
                 return result;
             } catch (error) {
                 console.error('Error fetching metal rates:', error);
+                throw error;
+            }
+        }
+
+        // Function to fetch stock data from Alpha Vantage API
+        async function fetchStockData(symbol) {
+            const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`;
+            
+            try {
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                // Check for API errors
+                if (result['Error Message']) {
+                    throw new Error(result['Error Message']);
+                }
+                
+                if (result['Note']) {
+                    throw new Error('API call frequency limit reached. Please try again later.');
+                }
+                
+                if (!result['Global Quote']) {
+                    throw new Error('Invalid stock symbol or no data available');
+                }
+                
+                return result['Global Quote'];
+            } catch (error) {
+                console.error('Error fetching stock data:', error);
                 throw error;
             }
         }
@@ -601,7 +494,7 @@
 
             try {
                 apiStatus.textContent = 'Fetching live prices...';
-                apiStatus.className = 'api-status';
+                apiStatus.className = 'api-status loading';
 
                 // Fetch metal rates data
                 const metalData = await fetchMetalRates();
@@ -610,10 +503,6 @@
                 if (!metalData || !metalData.metals) {
                     throw new Error('Invalid data received from API');
                 }
-
-                // Log the complete API response to console
-                console.log('Complete API Response:', metalData);
-                console.log('Metals Data:', metalData.metals);
 
                 // Extract prices (already in USD per troy ounce)
                 const currentGoldPrice = metalData.metals.gold;
@@ -684,14 +573,6 @@
                 apiStatus.textContent = `Last updated: ${new Date().toLocaleTimeString()} | Status: ${metalData.status || 'success'}`;
                 apiStatus.className = 'api-status success';
 
-                // Log specific data structure information
-                console.log('API Response Structure:');
-                console.log('- Status:', metalData.status);
-                console.log('- Currency:', metalData.currency);
-                console.log('- Unit:', metalData.unit);
-                console.log('- Timestamp:', metalData.timestamp);
-                console.log('- Metals object keys:', Object.keys(metalData.metals || {}));
-
             } catch (error) {
                 console.error('Error updating metal prices:', error);
                 apiStatus.textContent = `Error: ${error.message}`;
@@ -699,97 +580,184 @@
             }
         }
 
-        // Function to render news items
-        function renderNews() {
-            const newsFeed = document.getElementById('newsFeed');
-            newsFeed.innerHTML = '';
+        // Function to handle Enter key press in stock search
+        function handleStockKeyPress(event) {
+            if (event.key === 'Enter') {
+                addStock();
+            }
+        }
 
-            if (News.length === 0) {
-                newsFeed.innerHTML = '<div class="loading">No news articles available</div>';
+        // Function to add a stock to tracking
+        async function addStock() {
+            const stockSearchInput = document.getElementById('stockSearch');
+            const symbol = stockSearchInput.value.trim().toUpperCase();
+            
+            if (!symbol) {
+                alert('Please enter a stock symbol');
                 return;
             }
 
-            News.forEach((article, index) => {
-                const newsItem = document.createElement('div');
-                newsItem.className = 'news-item';
-                newsItem.style.animationDelay = `${index * 0.1}s`;
-
-                const category = article.topic || 'General';
-
-                const urlButton = article.url
-                    ? `<div style="text-align:left; margin-top:12px;">
-                            <a href="${article.url}" target="_blank" style="
-                                display:inline-block;
-                                padding:6px 12px;
-                                background-color:#1976d2;
-                                color:white;
-                                text-decoration:none;
-                                border-radius:6px;
-                                font-size:0.85em;">Know more →</a>
-                        </div>`
-                    : '';
-
-                newsItem.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <div class="news-title">${article.title}</div>
-                        <span style="
-                            font-size: 0.75em;
-                            color: #1976d2;
-                            background-color: rgba(25, 118, 210, 0.1);
-                            padding: 3px 10px;
-                            border-radius: 12px;
-                            font-weight: 600;
-                            text-transform: uppercase;
-                        ">${category}</span>
-                    </div>
-                    <div class="news-summary">${article.llm_summary}</div>
-                    
-                    ${urlButton}
-                `;
-
-                newsItem.addEventListener('click', () => {
-                    newsItem.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        newsItem.style.transform = 'scale(1)';
-                    }, 150);
-                });
-
-                newsFeed.appendChild(newsItem);
-            });
-        }
-
-        // Function to search stocks
-        function searchStocks() {
-            const searchTerm = document.getElementById('stockSearch').value.toLowerCase();
-            const stockItems = document.querySelectorAll('.price-item');
-            
-            stockItems.forEach(item => {
-                const label = item.querySelector('.price-label').textContent.toLowerCase();
-                
-                if (label.includes(searchTerm)) {
-                    item.style.display = 'flex';
-                    item.style.animation = 'fadeInDown 0.5s ease-out';
-                } else {
-                    item.style.display = searchTerm ? 'none' : 'flex';
-                }
-            });
-        }
-
-        // Add Enter key support for stock search
-        document.getElementById('stockSearch').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                searchStocks();
+            // Check if stock is already tracked
+            if (trackedStocks.find(stock => stock.symbol === symbol)) {
+                alert('Stock is already being tracked');
+                return;
             }
+
+            const stockApiStatus = document.getElementById('stockApiStatus');
+            stockApiStatus.textContent = `Fetching ${symbol} data...`;
+            stockApiStatus.className = 'api-status loading';
+
+            try {
+                const stockData = await fetchStockData(symbol);
+                
+                const stockInfo = {
+                    symbol: symbol,
+                    price: parseFloat(stockData['05. price']),
+                    change: parseFloat(stockData['09. change']),
+                    changePercent: stockData['10. change percent'].replace('%', ''),
+                    lastUpdated: stockData['07. latest trading day']
+                };
+
+                trackedStocks.push(stockInfo);
+                renderStocks();
+                
+                stockSearchInput.value = '';
+                stockApiStatus.textContent = `${symbol} added successfully`;
+                stockApiStatus.className = 'api-status success';
+
+            } catch (error) {
+                console.error('Error adding stock:', error);
+                stockApiStatus.textContent = `Error: ${error.message}`;
+                stockApiStatus.className = 'api-status error';
+            }
+        }
+
+        // Function to remove a stock from tracking
+        function removeStock(symbol) {
+            trackedStocks = trackedStocks.filter(stock => stock.symbol !== symbol);
+            renderStocks();
+            
+            const stockApiStatus = document.getElementById('stockApiStatus');
+            stockApiStatus.textContent = `${symbol} removed from tracking`;
+            stockApiStatus.className = 'api-status';
+        }
+
+        // Function to render stocks
+        function renderStocks() {
+            const stocksList = document.getElementById('stocksList');
+            const stocksLoading = document.getElementById('stocksLoading');
+            
+            if (trackedStocks.length === 0) {
+                stocksList.innerHTML = '<div class="stock-loading" id="stocksLoading">Add stock symbols to track prices</div>';
+                return;
+            }
+
+            stocksList.innerHTML = '';
+
+            trackedStocks.forEach(stock => {
+                const stockItem = document.createElement('div');
+                stockItem.className = 'price-item';
+                stockItem.style.animation = 'fadeInDown 0.5s ease-out';
+
+                const changeClass = stock.change >= 0 ? 'positive' : 'negative';
+                const changeSign = stock.change >= 0 ? '+' : '';
+
+                stockItem.innerHTML = `
+                    <span class="price-label">📊 ${stock.symbol}</span>
+                    <span class="price-value">
+                        ${formatUSD(stock.price)}
+                        <span class="price-change ${changeClass}">
+                            ${changeSign}${stock.changePercent}%
+                        </span>
+                    </span>
+                    <button class="delete-btn" onclick="removeStock('${stock.symbol}')" title="Remove ${stock.symbol}">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                `;
+                
+                stocksList.appendChild(stockItem);
+            });
+        }
+
+        // Function to render news
+        function renderNews() {
+    const newsList = document.getElementById('newsList');
+    newsList.innerHTML = '';
+
+    if (News.length === 0) {
+        newsList.innerHTML = '<div class="loading">No news articles available</div>';
+        return;
+    }
+
+    News.forEach((newsItem, index) => {
+        const newsElement = document.createElement('div');
+        newsElement.className = 'news-item';
+        newsElement.style.animationDelay = `${index * 0.1}s`;
+
+        const category = newsItem.topic || 'General';
+
+        const urlButton = newsItem.url
+            ? `<div style="text-align:left; margin-top:12px;">
+                    <a href="${newsItem.url}" target="_blank" style="
+                        display:inline-block;
+                        padding:6px 12px;
+                        background-color:#1976d2;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:6px;
+                        font-size:0.85em;">Know more →</a>
+                </div>`
+            : '';
+
+        newsElement.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <div class="news-title">${newsItem.title}</div>
+                <span style="
+                    font-size: 0.75em;
+                    color: #1976d2;
+                    background-color: rgba(25, 118, 210, 0.1);
+                    padding: 3px 10px;
+                    border-radius: 12px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                ">${category}</span>
+            </div>
+            <div class="news-description">${newsItem.description || newsItem.llm_summary || ''}</div>
+            ${urlButton}
+        `;
+
+        newsElement.addEventListener('click', () => {
+            newsElement.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                newsElement.style.transform = 'scale(1)';
+            }, 150);
         });
 
-        // Initialize the dashboard
-        renderNews();
-        
-        // Initial fetch of metal prices
-        updateMetalPrices();
+        newsList.appendChild(newsElement);
+    });
+}
 
-        // Update metal prices every 60 seconds
-        setInterval(updateMetalPrices, 60000);
+
+        // Initialize the application
+        function init() {
+            console.log('Metal Prices & Stock Tracker initialized');
+            renderNews();
+            updateMetalPrices(); // Load initial metal prices
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', init);
+
+        // Adding date
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = today.toLocaleDateString(undefined, options); // e.g., "July 11, 2025"
+
+        const newsHeading = document.getElementById('newsHeading');
+        newsHeading.textContent = `📰 News - ${formattedDate}`;
+
     </script>
 </body>
 </html>
