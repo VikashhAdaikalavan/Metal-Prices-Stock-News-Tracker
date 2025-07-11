@@ -382,8 +382,8 @@
         let previousPrices = {};
 
         // *** API KEYS ***
-        const METALS_API_KEY = "METALS_API_KEY"; 
-        const ALPHA_VANTAGE_API_KEY = "ALPHA_VANTAGE_KEY"; 
+        const METALS_API_KEY = ""; 
+        const ALPHA_VANTAGE_API_KEY = ""; 
         
         // Store tracked stocks
         let trackedStocks = [];
@@ -619,6 +619,7 @@
                 };
 
                 trackedStocks.push(stockInfo);
+                localStorage.setItem('trackedStocks', JSON.stringify(trackedStocks));
                 renderStocks();
                 
                 stockSearchInput.value = '';
@@ -635,6 +636,9 @@
         // Function to remove a stock from tracking
         function removeStock(symbol) {
             trackedStocks = trackedStocks.filter(stock => stock.symbol !== symbol);
+
+            localStorage.setItem('trackedStocks', JSON.stringify(trackedStocks));
+
             renderStocks();
             
             const stockApiStatus = document.getElementById('stockApiStatus');
@@ -678,6 +682,7 @@
                 `;
                 
                 stocksList.appendChild(stockItem);
+
             });
         }
 
@@ -743,6 +748,13 @@
         // Initialize the application
         function init() {
             console.log('Metal Prices & Stock Tracker initialized');
+
+            const savedStocks = localStorage.getItem('trackedStocks');
+            if (savedStocks) {
+                trackedStocks = JSON.parse(savedStocks);
+                renderStocks();
+            }
+
             renderNews();
             updateMetalPrices(); // Load initial metal prices
         }

@@ -7,7 +7,7 @@ import html
 base_dir = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(base_dir,'news.db')
 
-with open (os.path.join(base_dir, "dashboard.html"),'r',encoding="utf-8") as f:
+with open (os.path.join(base_dir, "dashboardtest.html"),'r',encoding="utf-8") as f:
     html_content = f.read()
 
 try:
@@ -30,14 +30,12 @@ for topic, title, url,summary, llm_summary in data:
 
 
     insert_html += f"""
-    
     {{
         topic : "{html.escape(topic).capitalize()}",
         title:"{html.escape(title).capitalize()}",
         llm_summary:"{html.escape(llm_summary)}",
         url:"{html.escape(url)}"
     }},
-    
     """
 if insert_html.strip().endswith(','):
     insert_html = insert_html.rstrip(', \n')
@@ -53,7 +51,7 @@ end_index = html_content.find(end_marker)
 final_html = html_content[:start_index] + insert_html + html_content[end_index:]
 
 
-with open (os.path.join(base_dir, "dashboard.html"),'w',encoding="utf-8") as f:
+with open (os.path.join(base_dir, "dashboardtest.html"),'w',encoding="utf-8") as f:
     f.write(final_html)
 
 
