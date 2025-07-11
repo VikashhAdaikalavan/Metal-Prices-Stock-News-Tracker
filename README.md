@@ -58,7 +58,6 @@ This is a perfect tool for investors, traders, and finance enthusiasts to stay i
 
 
 ![alt text](image1.png)
-
 ![alt text](image2.png)
 
 
@@ -67,5 +66,6 @@ This is a perfect tool for investors, traders, and finance enthusiasts to stay i
 This project is licensed under the Apache-2.0 License.
 
 Vikashh Adaikalavan K
+
 Gmail: vikashhadaikalavan@gmail.com
 
