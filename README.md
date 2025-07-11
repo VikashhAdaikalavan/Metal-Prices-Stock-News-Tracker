@@ -1,9 +1,10 @@
 # 🏆 Metal Prices, Stock & News Tracker
 
-A sleek, responsive web app that lets users:
-- 🪙 Track real-time **precious metal prices** (Gold, Silver, Platinum, Palladium)
-- 📈 Monitor live **stock market prices** using stock symbols (via Alpha Vantage)
-- 📰 View daily curated **financial news**
+A sleek, responsive code for sending news emails daily and a web app that lets users:
+- 📰 View daily curated **financial news** (Email/Web)
+- 🪙 Track real-time **precious metal prices** (Gold, Silver, Platinum, Palladium) (Web)
+- 📈 Monitor live **stock market prices** using stock symbols (via Alpha Vantage) (Web)
+
 
 This is a perfect tool for investors, traders, and finance enthusiasts to stay informed.
 
