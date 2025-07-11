@@ -78,8 +78,6 @@ app_password = os.getenv('EMAIL_PASS')
 
 list_of_receivers = []
 
-#sender_email = os.environ.get("EMAIL_USER")
-#app_password = os.environ.get("EMAIL_PASS")
 
 server = smtplib.SMTP('smtp.gmail.com',587)
 server.starttls()
