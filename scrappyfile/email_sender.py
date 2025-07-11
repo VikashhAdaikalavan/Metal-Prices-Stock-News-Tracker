@@ -7,6 +7,8 @@ import html
 import sqlite3
 import os
 from datetime import datetime
+from dotenv import load_dotenv
+
 
 
 # Reading files 
@@ -71,10 +73,10 @@ final_html = html_content[:start_index] + news_html + html_content[end_index:]
 
 # Email_sending
 
-sender_email = "vikashhadaikalavansg@gmail.com"
-app_password = "ugyt ibyk dhwc vnnl"
+sender_email = os.getenv('EMAIL_USER')
+app_password = os.getenv('EMAIL_PASS')
 
-list_of_receivers = ['vikashhadaikalavan@gmail.com']
+list_of_receivers = []
 
 #sender_email = os.environ.get("EMAIL_USER")
 #app_password = os.environ.get("EMAIL_PASS")
