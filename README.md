@@ -22,6 +22,7 @@ This is a perfect tool for investors, traders, and finance enthusiasts to stay i
 
 1. **Clone this repo**
    git clone https://github.com/your-username/metal-stock-news-tracker.git
+   
    cd metal-stock-news-tracker
 
 2. **Install Python dependencies**
