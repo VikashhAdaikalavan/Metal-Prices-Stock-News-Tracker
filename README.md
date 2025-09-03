@@ -1,25 +1,25 @@
-# 🏆 Metal Prices, Stock & News Tracker
+#  Metal Prices, Stock & News Tracker
 
 A sleek, responsive code for sending news emails daily and a web app that lets users:
-- 📰 View daily curated **financial news** (Email/Web)
-- 🪙 Track real-time **precious metal prices** (Gold, Silver, Platinum, Palladium) (Web)
-- 📈 Monitor live **stock market prices** using stock symbols (via Alpha Vantage) (Web)
+-  View daily curated **financial news** (Email/Web)
+-  Track real-time **precious metal prices** (Gold, Silver, Platinum, Palladium) (Web)
+-  Monitor live **stock market prices** using stock symbols (via Alpha Vantage) (Web)
 
 
 This is a perfect tool for investors, traders, and finance enthusiasts to stay informed.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 💰 Live updates for Gold, Silver, Platinum & Palladium (in USD/oz)
-- 🧠 Smart tracking for multiple stock symbols
-- 🔔 Real-time price change indicators
-- 🗞️ Financial news with summaries and source links
+-  Live updates for Gold, Silver, Platinum & Palladium (in USD/oz)
+-  Smart tracking for multiple stock symbols
+-  Real-time price change indicators
+- 🗞 Financial news with summaries and source links
 
 ---
 
-## 🔧 Setup Instructions
+##  Setup Instructions
 
 1. **Clone this repo**
    git clone https://github.com/your-username/metal-stock-news-tracker.git
