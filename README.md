@@ -1,12 +1,12 @@
 #  Metal Prices, Stock & News Tracker
 
-A sleek, responsive code for sending news emails daily and a web app that lets users:
+Code for sending news emails daily and a web app that lets users:
 -  View daily curated **financial news** (Email/Web)
 -  Track real-time **precious metal prices** (Gold, Silver, Platinum, Palladium) (Web)
 -  Monitor live **stock market prices** using stock symbols (via Alpha Vantage) (Web)
 
 
-This is a perfect tool for investors, traders, and finance enthusiasts to stay informed.
+This tool was made due to diffulties I faced in getting daily news in my university.
 
 ---
 
@@ -15,7 +15,7 @@ This is a perfect tool for investors, traders, and finance enthusiasts to stay i
 -  Live updates for Gold, Silver, Platinum & Palladium (in USD/oz)
 -  Smart tracking for multiple stock symbols
 -  Real-time price change indicators
-- 🗞 Financial news with summaries and source links
+-  Financial news with summaries and source links
 
 ---
 
@@ -57,6 +57,10 @@ This is a perfect tool for investors, traders, and finance enthusiasts to stay i
 
 5. **View your personalised dashboard**
     Your dashboard will be ready to be viewed!
+    
+
+The HTML Dashboard here was not created by me. The original aim of this project was to send an daily email to all users regarding daily news. 
+I just wanted to see how this can be implemented in a dashboard hence the dashboard was just an extra idea which popped up.
 
 
 ![alt text](image1.png)

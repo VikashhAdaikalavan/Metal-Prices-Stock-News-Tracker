@@ -380,8 +380,414 @@
     <script>
         
        // START LOOP HERE  
-const News = [];
-        // END LOOP HERE 
+const News = [
+
+    {
+        topic : "World",
+        title:"Major adil raja claims threats, family targeted after exposing pakistan army",
+        llm_summary:"Major (Retd) Adil Raja has accused the Pakistani military establishment of weaponising the UK&#x27;s libel laws to silence dissent abroad . He says Pakistan&#x27;s military establishment, particularly the ISI, has weaponised the UK libel laws .",
+        url:"https://www.indiatoday.in/world/story/major-adil-raja-claims-threats-family-targeted-after-exposing-pakistan-army-glbg-2758503-2025-07-20"
+    },
+    
+    {
+        topic : "World",
+        title:"Tsunami alert issued for russia after five powerful earthquakes hit in an hour",
+        llm_summary:"Five powerful earthquakes struck within an hour in the Pacific Ocean near the city of Petropavlovsk-Kamchatsky . A tsunami alert has been issued for Russia following the quakes .",
+        url:"https://www.indiatoday.in/world/story/two-powerful-earthquakes-off-pacific-coast-trigger-tsunami-warning-in-russia-2758497-2025-07-20"
+    },
+    
+    {
+        topic : "World",
+        title:"Typhoon wipha triggers highest storm alert in hong kong, cancels over 200 flights",
+        llm_summary:"Hurricane-force wind is affecting the southern part of Hong Kong, observatory says . Hurricane force winds are affecting southern parts of the city . Hurricane winds are also affecting Hong Kong&#x27;s southern coast .",
+        url:"https://www.indiatoday.in/world/story/typhoon-wipha-triggers-highest-storm-alert-in-hong-kong-cancels-over-200-flights-2758478-2025-07-20"
+    },
+    
+    {
+        topic : "World",
+        title:"Saudi arabia&#x27;s &#x27;sleeping prince&#x27; al waleed bin khaled dies after 20 years in coma",
+        llm_summary:"Prince Al Waleed was the eldest son of Prince Khaled bin Talal Al Saud, a prominent Saudi royal . He was the nephew of billionaire Prince Al-Waleed bin Tala . At the age of 15, he suffered severe brain injuries and internal bleeding in a road accident .",
+        url:"https://www.indiatoday.in/world/story/saudi-arabias-sleeping-prince-al-waleed-bin-khaled-dies-after-20-years-in-coma-2758458-2025-07-20"
+    },
+    
+    {
+        topic : "World",
+        title:"Delta&#x27;s boeing 767 engine in flames mid-air, makes emergency landing in la",
+        llm_summary:"A Delta Airlines Boeing 767 experienced an engine fire shortly after taking off from Los Angeles airport . The flight was compelled to execute an emergency landing back in Los Angeles . All passengers and crew on board are reported to be safe .",
+        url:"https://www.indiatoday.in/world/us-news/video/deltas-boeing-767-engine-in-flames-mid-air-makes-emergency-landing-in-la-2758433-2025-07-20"
+    },
+    
+    {
+        topic : "World",
+        title:"China begins construction of $167 billion mega dam over brahmaputra in tibet",
+        llm_summary:"The hydropower project is regarded as the biggest infrastructure project in the world . It raised concerns in the lower riparian countries, India and Bangladesh . The project is believed to be the world&#x27;s biggest hydroelectric power project .",
+        url:"https://www.indiatoday.in/world/story/china-begins-construction-of-167-billion-mega-dam-over-brahmaputra-in-tibet-2758406-2025-07-20"
+    },
+    
+    {
+        topic : "Sports",
+        title:"Eng vs ind: rishabh pant on verge of breaking virender sehwag&#x27;s major record",
+        llm_summary:"Rishabh Pant is on the verge of breaking Virender Sehwag&#x27;s record during the fourth Test against England at Old Trafford, Manchester set to be played from July 23 .",
+        url:"https://www.indiatoday.in/sports/cricket/story/eng-vs-ind-rishabh-pant-on-verge-of-breaking-virender-sehwags-record-2758517-2025-07-20"
+    },
+    
+    {
+        topic : "Sports",
+        title:"Kl rahul eyes 9000 runs for india, aims for career-best test series",
+        llm_summary:"KL Rahul will be looking to achieve two major landmarks in his career when India face England in the fourth Test at Old Trafford . The fourth Test starts July 20 at the Old Trafford in Manchester . England beat India by one wicket in the first Test of the series .",
+        url:"https://www.indiatoday.in/sports/cricket/story/kl-rahul-england-vs-india-manchester-test-2758521-2025-07-20"
+    },
+    
+    {
+        topic : "Sports",
+        title:"Shubman gill eyes 19-year-old asian record in manchester test",
+        llm_summary:"Indian captain Shubman Gill has a chance to break Mohammad Yousuf&#x27;s record for the most runs by an Asian batter in a bilateral Test series on English soil . Gill is hoping to become the first Asian batter to score most runs in a Test series in England .",
+        url:"https://www.indiatoday.in/sports/cricket/story/shubman-gill-manchester-test-england-vs-india-4th-test-2758487-2025-07-20"
+    },
+    
+    {
+        topic : "Sports",
+        title:"Eng vs ind: akash deep&#x27;s injury adds to india&#x27;s woes ahead of 4th test",
+        llm_summary:"Akash Deep is dealing with a groin niggle, which puts his participation in the fourth Test in doubt . India have been dealt with another major blow ahead of the Test against England . Fast bowler Deep is the latest India player to be ruled out of the next Test .",
+        url:"https://www.indiatoday.in/sports/cricket/story/eng-vs-ind-akash-deeps-injury-adds-to-indias-woes-ahead-of-manchester-test-2758484-2025-07-20"
+    },
+    
+    {
+        topic : "Sports",
+        title:"James anderson on sharing trophy name with sachin tendulkar: i feel out of place",
+        llm_summary:"James Anderson has said he feels out of place sharing his name with Sachin Tendulkar . The England fast bowler said he is &#x27;out of place&#x27; in sharing the name of the Test series trophy . Anderson has won the series in a five-match series against India . The series is one of the best in Test cricket history .",
+        url:"https://www.indiatoday.in/sports/cricket/story/james-anderson-on-sharing-trophy-name-with-sachin-tendulkar-i-feel-out-of-place-2758475-2025-07-20"
+    },
+    
+    {
+        topic : "Sports",
+        title:"West indies vs australia t20i series: squads and all you need to know",
+        llm_summary:"Australia take on the West Indies in the five-match T20I series . Shai Hope-led West Indies take on Australia in the series . Mitchell Marsh&#x27;s side won the Test series 2-1 after winning the ODI series .",
+        url:"https://www.indiatoday.in/sports/cricket/story/west-indies-vs-australia-t20i-series-squads-schedule-mitchell-marsh-2758471-2025-07-20"
+    },
+    
+    {
+        topic : "Science",
+        title:"Watch: india&#x27;s shubhanshu shukla floating in space station is all things cool",
+        llm_summary:"India&#x27;s first ISS astronaut, Shubhanshu Shukla, captivated audiences with a video of him calmly floating in zero gravity . The video highlights the challenges of microgravity in microgravity .",
+        url:"https://www.indiatoday.in/science/story/india-shubhanshu-shukla-astronaut-floating-space-station-2758358-2025-07-19"
+    },
+    
+    {
+        topic : "Science",
+        title:"Shux didn&#x27;t just orbit earth. he elevated india&#x27;s orbit in the world",
+        llm_summary:"Group Captain Shubhanshu Shukla&#x27;s space mission marks India&#x27;s bold stride in soft diplomacy . The mission blends science, global partnerships, and cultural pride to position the nation as a trusted space collaborator .",
+        url:"https://www.indiatoday.in/opinion/story/shubhanshu-shukla-didnt-just-orbit-earth-he-elevated-india-space-mission-in-the-world-2758103-2025-07-19"
+    },
+    
+    {
+        topic : "Science",
+        title:"Starliner that stranded sunita williams in space won&#x27;t fly",
+        llm_summary:"Four spacecraft, including SpaceX Dragon, Soyuz MS-27, and two Progress resupply ships, are docked to the ISS . Four spacecraft are currently docked at the ISS, supporting a dynamic crew rotation .",
+        url:"https://www.indiatoday.in/science/story/starliner-that-stranded-sunita-williams-in-space-will-not-fly-until-2026-2757864-2025-07-18"
+    },
+    
+    {
+        topic : "Science",
+        title:"Baby planet discovered by nasa is shrinking. its atmosphere is melting",
+        llm_summary:"TOI 1227 b is among the youngest exoplanets ever observed . It is estimated to be just 8 million years old . The planet is a true &quot;baby&quot; compared to Earth&#x27;s 5-billion-year-old age .",
+        url:"https://www.indiatoday.in/science/story/baby-planet-discovered-by-nasa-is-shrinking-its-atmosphere-is-melting-2757847-2025-07-18"
+    },
+    
+    {
+        topic : "Science",
+        title:"Felix baumgartner dead: relive how he jumped from the edge of space",
+        llm_summary:"Just hours before the accident, Baumgartner posted to Instagram about &quot;too much wind,&quot; hinting at the challenging flying conditions . The accident occurred in the early hours of Saturday morning .",
+        url:"https://www.indiatoday.in/science/story/felix-baumgartner-dead-relive-the-moment-he-jumped-from-the-edge-of-space-2757732-2025-07-18"
+    },
+    
+    {
+        topic : "Science",
+        title:"Isro likely to launch joint nisar mission with nasa by end of july",
+        llm_summary:"Both the NISAR spacecraft and the GSLV-F16 launch vehicle are undergoing final checks and extensive reviews at the spaceport in Sriharikota . The launch vehicle is currently undergoing final tests and extensive review .",
+        url:"https://www.indiatoday.in/science/story/isro-likely-to-launch-joint-nisar-mission-with-nasa-by-end-of-july-2757622-2025-07-18"
+    },
+    
+    {
+        topic : "Business",
+        title:"Standard not met: what astronomer said on ceo andy byron&#x27;s coldplay kiss cam row",
+        llm_summary:"Astronomer responded to the viral video by placing CEO Andy Byron on leave . Byron confirmed his resignation after stating that leadership standards had not been met . The company emphasised its commitment to accountability and the core values it was founded on .",
+        url:"https://www.indiatoday.in/business/story/standard-not-met-what-astronomer-said-on-ceo-andy-byron-kristine-cabot-coldplay-kiss-cam-scandal-2758498-2025-07-20"
+    },
+    
+    {
+        topic : "Business",
+        title:"India&#x27;s rich are swapping gold for bitcoin. here&#x27;s why",
+        llm_summary:"Now-a-days more of India&#x27;s rich are putting a slice of their gold-backed wealth into shiny new digital coins like Bitcoin . Bitcoin is a digital currency that can only be bought in India .",
+        url:"https://www.indiatoday.in/business/story/india-rich-are-swapping-gold-for-bitcoin-here-is-why-gold-vs-bitcoin-2758472-2025-07-20"
+    },
+    
+    {
+        topic : "Business",
+        title:"Astronomer ceo andy byron quits after coldplay kiss cam scandal",
+        llm_summary:"Astronomer&#x27;s CEO, Andy Byron, has resigned following a scandal at a Coldplay concert . The board of directors accepted the resignation, stating that &quot;the company&#x27;s standard wasn&#x27;t met&quot; The New York-based unicorn company, founded in 2018, confirmed that a new CEO is underway .",
+        url:"https://www.indiatoday.in/business/video/astronomer-ceo-andy-byron-quits-after-coldplay-kiss-cam-scandal-2758451-2025-07-20"
+    },
+    
+    {
+        topic : "Business",
+        title:"Andy byron, astronomer ceo caught in coldplay kiss cam scandal, resigns",
+        llm_summary:"Andy Byron resigns as CEO of AI firm Astronomer after a viral &#x27;kiss cam&#x27; video with HR chief Kristin Cabot sparks online speculation . The video sparked online speculation and prompted an internal review by the company .",
+        url:"https://www.indiatoday.in/business/story/andy-byron-astronomer-ceo-caught-in-coldplay-kiss-cam-scandal-resigns-glbs-2758389-2025-07-20"
+    },
+    
+    {
+        topic : "Business",
+        title:"Career, kids and a cause: shloka ambani shares what keeps her going",
+        llm_summary:"In a heart-to-heart on Masoom Minawala&#x27;s podcast, Shloka opened up about balancing kids, career, and a cause she truly believes in . She appeared on the show to talk about her journey .",
+        url:"https://www.indiatoday.in/business/story/shloka-ambani-interview-she-shares-what-keeps-her-going-career-kids-and-cause-2758378-2025-07-19"
+    },
+    
+    {
+        topic : "Business",
+        title:"Astronomer ceo, hr head sent on leave after coldplay kiss cam outs &#x27;affair&#x27;",
+        llm_summary:"The company issued an official statement two days after the incident, announcing that its board had initiated an internal investigation . The board has since announced that it is investigating the incident . The company has not commented on the matter of the investigation .",
+        url:"https://www.indiatoday.in/business/story/astronomer-ceo-andy-byron-cpo-kristin-cabot-leave-coldplay-concert-video-investigation-statement-2758075-2025-07-19"
+    },
+    
+    {
+        topic : "Education-today",
+        title:"University of san diego launches online masters programme for indian professionals",
+        llm_summary:"The University of San Diego has launched an online masters&#x27; tech programme for Indian working professionals . The application deadline is set for August 1, 2025 . This is the first time USD&#x27;s online Master&#x27;s degrees are open to learners outside the US .",
+        url:"https://www.indiatoday.in/education-today/news/story/university-of-san-diego-launches-20-month-online-masters-tech-programme-for-indian-professionals-2758504-2025-07-20"
+    },
+    
+    {
+        topic : "Education-today",
+        title:"New ncert textbook brings project-based learning to sanskrit in class 8",
+        llm_summary:"NCERT&#x27;s new Sanskrit textbook marks a shift in how the language is taught . There is a focus on practical use, cultural relevance, and alignment with updated education policy . The new textbook is published by NCERT .",
+        url:"https://www.indiatoday.in/education-today/news/story/ncert-introduces-deepakam-a-new-age-sanskrit-textbook-for-school-students-2758508-2025-07-20"
+    },
+    
+    {
+        topic : "Education-today",
+        title:"India wins 3 golds at international mathematical olympiad in australia, ranks 7th",
+        llm_summary:"India won six medals: three gold, two silver, and one bronze . India ranked 7th amongst 110 participating countries at the International Mathematical Olympiad in Australia . India won three gold and two silver medals at the event, which was held on the Sunshine Coast .",
+        url:"https://www.indiatoday.in/education-today/news/story/india-secures-7th-rank-at-imo-2025-with-record-score-and-3-gold-medals-wins-2758482-2025-07-20"
+    },
+    
+    {
+        topic : "Education-today",
+        title:"India becomes first nation to digitise traditional medicine with ai-powered library",
+        llm_summary:"India has become the first country to digitise its traditional medical knowledge using an AI-powered library . The platform includes systems like Ayurveda, Siddha, and Sowa-Rigpa, aiming to preserve ancient health practices .",
+        url:"https://www.indiatoday.in/education-today/news/story/ayurveda-meets-ai-india-becomes-first-country-to-digitise-traditional-medicine-2758486-2025-07-20"
+    },
+    
+    {
+        topic : "Education-today",
+        title:"School fee hike sparks protest by parents in delhi, demand reforms",
+        llm_summary:"Parents have been protesting at Jantar Mantar against private school fee hikes . Parents also objected to the recently passed Fee Regulation Ordinance Ordinance 2025, which protestors claimed was implemented without sufficient public consultation .",
+        url:"https://www.indiatoday.in/education-today/news/story/parents-protest-at-jantar-mantar-over-school-fee-hike-seek-reforms-2758470-2025-07-20"
+    },
+    
+    {
+        topic : "Education-today",
+        title:"Nutrition isn&#x27;t a side note anymore: iisc and tufts team up to heal through food",
+        llm_summary:"IISc and Tufts University have joined hands to create a cutting-edge nutrition science centre in India . Researchers are teaming up to turn food into futuristic medicine using AI, ancient wisdom, and global research to revolutionise how we eat, treat disease, and stay healthy .",
+        url:"https://www.indiatoday.in/education-today/featurephilia/story/iisc-tufts-pact-nutrition-science-food-as-medicine-2758310-2025-07-19"
+    },
+    
+    {
+        topic : "Technology",
+        title:"Elon musk announces &#x27;baby grok&#x27; for kid-friendly content",
+        llm_summary:"Elon Musk recently announced that xAI, his AI company and the parent of Grok AI, will bring a new app called Baby Grok . It aims to offer kid-friendly content only .",
+        url:"https://www.indiatoday.in/technology/news/story/after-launching-raunchy-ai-companions-elon-musk-announces-baby-grok-for-kid-friendly-content-2758460-2025-07-20"
+    },
+    
+    {
+        topic : "Technology",
+        title:"Microsoft stops using chinese tech support for this customer",
+        llm_summary:"Microsoft has halted support from its China-based engineers for US defence clients . A ProPublica report exposed the Pentagon&#x27;s reliance on those teams . Microsoft halted technical support from those teams following the report .",
+        url:"https://www.indiatoday.in/technology/news/story/microsoft-stops-using-chinese-tech-support-for-this-customer-over-national-security-concerns-2758438-2025-07-20"
+    },
+    
+    {
+        topic : "Technology",
+        title:"Samsung galaxy f36 5g launched, price is less than rs 20,000",
+        llm_summary:"Samsung unveils the Galaxy F36 5G in India, featuring a Super AMOLED display, Exynos 1380 chip, and 50-megapixel camera . Samsung also unveils a 5G 5G handset with a Super-AMOLed display and 50MP camera .",
+        url:"https://www.indiatoday.in/technology/news/story/samsung-galaxy-f36-5g-launched-with-50mp-ois-camera-and-5000mah-battery-price-is-less-than-rs-20000-2758474-2025-07-20"
+    },
+    
+    {
+        topic : "Technology",
+        title:"Elon musk confirms popcorn-serving tesla optimus robots are coming soon near you",
+        llm_summary:"Elon Musk&#x27;s Tesla Optimus robots were seen serving popcorn . Musk believes it will become normal in a few years . Elon Musk: &#x27;I&#x27;m not sure if I like it or not, it will be normal in the future&#x27;",
+        url:"https://www.indiatoday.in/technology/news/story/elon-musk-confirms-popcorn-serving-tesla-optimus-robots-are-coming-soon-to-a-diner-near-you-2758496-2025-07-20"
+    },
+    
+    {
+        topic : "Auto",
+        title:"Combi brakes vs abs: which system is best for your bike?",
+        llm_summary:"Combi brakes and ABS offer distinct benefits, here&#x27;s a quick guide to help you decide which suits your ride best . The right braking system is crucial for safety when riding . Click here for more information on how to buy a new bike .",
+        url:"https://www.indiatoday.in/auto/the-advisor/story/combi-brakes-vs-abs-which-system-is-best-for-your-bike-2758207-2025-07-20"
+    },
+    
+    {
+        topic : "India",
+        title:"Yogi adityanath hits out at media trial of kanwariyas, defends shiva devotees",
+        llm_summary:"Uttar Pradesh Chief Minister Yogi Adityanath has defended the Kanwariyas . He claimed they have been branded as hooligans and terrorists and are victims of a &quot;media trial&quot; The Chief Minister added that this represents a mentality that aims to insult India&#x27;s heritage .",
+        url:"https://www.indiatoday.in/india/video/yogi-adityanath-hits-out-at-media-trial-of-kanwariyas-defends-shiva-devotees-2758532-2025-07-20"
+    },
+    
+    {
+        topic : "Lifestyle",
+        title:"Do microgreens deserve a place on your plate?",
+        llm_summary:"Microgreens have become a buzzword in the food industry . They are highly nutritious and easy to grow at home . But are they too good to be true? Find out more about how to grow your own microgreens .",
+        url:"https://www.indiatoday.in/lifestyle/food/story/do-microgreens-deserve-a-place-on-your-plate-2757729-2025-07-19"
+    },
+    
+    {
+        topic : "Movies",
+        title:"Rajamouli, wife rama enjoy brad pitt&#x27;s f1 at hyderabad&#x27;s prasads theatre. watch",
+        llm_summary:"Filmmaker SS Rajamouli was captured watching actor Brad Pitt&#x27;s &#x27;F1 The Movie&#x27; Videos of him leaving the theatres went viral . The filmmaker was seen leaving the theatre in the middle of the night .",
+        url:"https://www.indiatoday.in/movies/regional-cinema/story/rajamouli-wife-rama-watch-brad-pitt-f1-hyderabad-prasads-theatre-2758519-2025-07-20"
+    },
+    
+    {
+        topic : "Auto",
+        title:"Tata harrier.ev review, first drive: loaded to the gills with awd and tech",
+        llm_summary:"Tata has launched the electric version of the Harrier, and this time, it comes with an all-wheel-drive (AWD) option . So, is this the electric SUV that enthusiasts have been waiting for? We find out .",
+        url:"https://www.indiatoday.in/auto/cars/story/tata-harrierev-review-first-drive-loaded-to-the-gills-with-awd-and-tech-2758449-2025-07-20"
+    },
+    
+    {
+        topic : "Auto",
+        title:"Mg select experience centre debuts in delhi",
+        llm_summary:"JSW MG Motor India has unveiled its premium brand MG Select in Delhi, introducing a luxurious, gallery-inspired experience centre . MG Select is based in Delhi and is based on a range of luxury cars .",
+        url:"https://www.indiatoday.in/auto/cars/story/mg-select-experience-centre-debuts-in-delhi-2757829-2025-07-18"
+    },
+    
+    {
+        topic : "Auto",
+        title:"This is the next suv coming from maruti suzuki. not the e vitara",
+        llm_summary:"Maruti Suzuki is set to launch a new 5-seater SUV on September 3 . The new SUV will be the first of its kind in India and is expected to be launched in India .",
+        url:"https://www.indiatoday.in/auto/cars/story/maruti-suzuki-confirms-launch-date-of-its-first-electric-suv-the-e-vitara-2757790-2025-07-18"
+    },
+    
+    {
+        topic : "Auto",
+        title:"It&#x27;s a lamborghini even you can afford, but what is the kinetic connection?",
+        llm_summary:"Kinetic Green and Tonino Lamborghini have joined forces to launch a premium range of electric golf and lifestyle carts . The range blends Italian design with Indian innovation for global luxury mobility markets .",
+        url:"https://www.indiatoday.in/auto/new-launches/story/kinetic-green-tonino-lamborghini-unveils-luxury-electric-golf-lifestyle-carts-2757352-2025-07-18"
+    },
+    
+    {
+        topic : "Auto",
+        title:"Mercedes-amg cle 53 coupé to make debut in india on august 12",
+        llm_summary:"Mercedes-Benz will introduce the AMG CLE 53 Coupé in India on August 12 . The car will combine luxury and performance in a sleek, powerful package . It will be available in India for the first time .",
+        url:"https://www.indiatoday.in/auto/cars/story/mercedes-amg-cle-53-coupe-to-make-debut-in-india-on-august-12-2757358-2025-07-17"
+    },
+    
+    {
+        topic : "India",
+        title:"Centre to bring motion to impeach judge in cash row; 100 mps signed: kiren rijiju",
+        llm_summary:"The controversy surrounding Justice Varma dates back to March 2025, when a fire broke out at Yashwant Varma&#x27;s official residence in Delhi . A large quantity of burnt or partially burnt cash was allegedly recovered from the premises .",
+        url:"https://www.indiatoday.in/india/story/centre-will-bring-impeachment-motion-against-judge-in-parliament-session-100-mps-already-signed-kiren-rijiju-2758522-2025-07-20"
+    },
+    
+    {
+        topic : "India",
+        title:"Patna hospital murder: key accused, 4 others arrested in kolkata guesthouse raid",
+        llm_summary:"The arrests were the result of a joint midnight raid conducted by the Kolkata Police STF . The accused had travelled from Bihar by road and were hiding in two rooms . One of the accused, Tausif, used his own name to sign the guest register, which has been seized by the police .",
+        url:"https://www.indiatoday.in/india/video/patna-hospital-murder-key-accused-4-others-arrested-in-kolkata-guesthouse-raid-2758510-2025-07-20"
+    },
+    
+    {
+        topic : "India",
+        title:"Centre ready for op sindoor discussion in parliament, won&#x27;t shy away: kiren rijiju",
+        llm_summary:"The Centre will respond appropriately in Parliament, Rijiju said . The opposition raised the issue of Operation Sindoor, the Pahalgam terror attack and US President Trump&#x27;s ceasefire claims .",
+        url:"https://www.indiatoday.in/india/story/government-ready-for-discussion-on-op-sindoor-in-parliament-wont-shy-away-kiren-rijiju-after-all-party-meet-2758511-2025-07-20"
+    },
+    
+    {
+        topic : "India",
+        title:"Army to get 1st batch of apache choppers on july 22 after 15-month delay: sources",
+        llm_summary:"The first three Apache helicopters are likely to be handed over to the Indian Army&#x27;s Aviation Corps on July 22 . Sources say the delivery schedule is in place of the delivery of the first three helicopters .",
+        url:"https://www.indiatoday.in/india/story/army-to-get-1st-batch-of-apache-choppers-on-july-22-after-15-month-delay-say-sources-2758505-2025-07-20"
+    },
+    
+    {
+        topic : "India",
+        title:"Ysrcp mp midhun reddy arrested in rs 3200 crore andhra pradesh liquor scam",
+        llm_summary:"YSRP MP Midhun Reddy arrested in connection with alleged Rs 3200 crore liquor scam . Accused of causing a severe loss to the exchequer and undue use of power . Alleged use of kickbacks to fund the 2024 elections .",
+        url:"https://www.indiatoday.in/india/andhra-pradesh/video/ysrcp-mp-midhun-reddy-arrested-in-rs-3200-crore-andhra-pradesh-liquor-scam-2758492-2025-07-20"
+    },
+    
+    {
+        topic : "Lifestyle",
+        title:"A pint-sized chef is serving the most instagrammable dinner experience in delhi",
+        llm_summary:"Le Petit Chef at Shangri-La, New Delhi, is one of the world&#x27;s most unusual dining experiences . Watch a tiny chef leap across your table, dodge fiery woks, and whisk up a five-course masterpiece .",
+        url:"https://www.indiatoday.in/lifestyle/food/story/le-petit-chef-shangri-la-eros-delhi-instagram-worthy-immersive-dinner-experience-2757825-2025-07-18"
+    },
+    
+    {
+        topic : "Lifestyle",
+        title:"How your breakfast can help you reduce bloating",
+        llm_summary:"Your breakfast may be the reason you have been feeling bloated all day . To tackle that, all you need is a few lifestyle changes and of course, homemade food . Homemade food is a great way to tackle that .",
+        url:"https://www.indiatoday.in/lifestyle/wellness/story/breakfast-can-help-you-reduce-bloating-better-gut-health-2757248-2025-07-18"
+    },
+    
+    {
+        topic : "Lifestyle",
+        title:"Your beauty essentials are the most trending accessories now",
+        llm_summary:"In 2025, beauty is no longer tucked away in makeup pouches - it&#x27;s worn proudly on waist chains, handbags and phone covers . Everyday essentials like lip balm and sunscreen become statement accessories .",
+        url:"https://www.indiatoday.in/lifestyle/beauty/story/your-beauty-essentials-are-the-most-trending-accessories-now-2757188-2025-07-17"
+    },
+    
+    {
+        topic : "Lifestyle",
+        title:"Delhi&#x27;s lair and 4 other indian bars make it to asia&#x27;s 50 best list",
+        llm_summary:"India secured five places in the list of Asia&#x27;s 50 Best Bars . Lair, located in Delhi, clinched the eighth spot and was crowned as the &#x27;Best Bar in India&#x27; Lair is located in New Delhi .",
+        url:"https://www.indiatoday.in/lifestyle/food/story/delhi-lair-and-4-indian-bars-make-it-to-asia-50-best-bars-2025-2756712-2025-07-16"
+    },
+    
+    {
+        topic : "Lifestyle",
+        title:"Stuck in a thought spiral? here&#x27;s how to break the loop",
+        llm_summary:"The unending loop of rumination and overanalysis can build stress and anxiety in ways you might not even realise . An expert shares how to navigate overthinking with the help of an expert .",
+        url:"https://www.indiatoday.in/lifestyle/wellness/story/tips-to-manage-stress-stop-overthinking-and-ease-your-mind-2756574-2025-07-16"
+    },
+    
+    {
+        topic : "Movies",
+        title:"Mamata banerjee wishes speedy recovery to brother shah rukh khan after injury",
+        llm_summary:"West Bengal Chief Minister Mamata Banerjee expressed concern for Shah Rukh Khan&#x27;s injury during &#x27;King&#x27; shoot . He is currently in the UK recovering from the injury he sustained during the shoot .",
+        url:"https://www.indiatoday.in/movies/celebrities/story/mamata-banerjee-wishes-speedy-recovery-to-shah-rukh-khan-after-injury-2758513-2025-07-20"
+    },
+    
+    {
+        topic : "Movies",
+        title:"Nothing brings nick jonas more joy than celebrating priyanka, his new post has it all",
+        llm_summary:"Nick Jonas penned a heartfelt birthday tribute for his wife, Priyanka Chopra, accompanied by a romantic photo . The couple, who have been married since 2018, continue to serve major relationship goals .",
+        url:"https://www.indiatoday.in/movies/celebrities/story/nick-jonas-celebrates-priyanka-chopra-43-birthday-new-post-2758500-2025-07-20"
+    },
+    
+    {
+        topic : "Movies",
+        title:"Don director chandra barot dies at 86, farhan akhtar pays tribute",
+        llm_summary:"Chandra Barot died at the age of 86 . He was best known for his work in Amitabh Bachchan&#x27;s &#x27;Don&#x27; He was known for the role in the film &#x27;Don&#x27;, which was released in 2009 .",
+        url:"https://www.indiatoday.in/movies/celebrities/story/don-director-chandra-barot-dies-of-pulmonary-disease-at-86-2758494-2025-07-20"
+    },
+    
+    {
+        topic : "Movies",
+        title:"Just like that she&#x27;s a teen: mahesh babu, namrata wish daughter sitara on birthday",
+        llm_summary:"Sitara Ghattamaneni is the daughter of Telugu superstar Mahesh Babu and Namrata Shirodkar . She celebrated her 13th birthday surrounded by heartfelt wishes from family and fans .",
+        url:"https://www.indiatoday.in/movies/regional-cinema/story/mahesh-babu-namrata-shirodkar-wish-daughter-sitara-ghattamaneni-on-birthday-just-like-that-shes-a-teenager-2758483-2025-07-20"
+    },
+    
+    {
+        topic : "Movies",
+        title:"Sham kaushal was suicidal after cancer diagnosis: wanted to jump from third floor",
+        llm_summary:"Sham Kaushal&#x27;s doctor had warned him he might not survive after undergoing surgery . He believes it was his prayers and faith that helped him pull through . Actor&#x27;s father believes prayers and his faith helped him to pull through after surgery .",
+        url:"https://www.indiatoday.in/movies/celebrities/story/vicky-kaushal-father-sham-suicidal-after-cancer-diagnosis-ready-to-jump-third-floor-2758473-2025-07-20"
+    }
+];// END LOOP HERE 
 
         // Store previous prices for comparison
         let previousPrices = {};
