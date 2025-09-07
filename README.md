@@ -1,12 +1,12 @@
 #  Metal Prices, Stock & News Tracker
 
 Code for sending news emails daily and a web app that lets users:
--  View daily curated **financial news** (Email/Web)
+-  View daily curated **news** (Email/Web)
 -  Track real-time **precious metal prices** (Gold, Silver, Platinum, Palladium) (Web)
 -  Monitor live **stock market prices** using stock symbols (via Alpha Vantage) (Web)
 
 
-This tool was made due to diffulties I faced in getting daily news in my university.
+This tool was made due to difficulties I faced in getting daily news in my university.
 
 ---
 
